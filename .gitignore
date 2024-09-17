@@ -1,3 +1,7 @@
 .classpath
 .settings
 .project
+.log
+.tmp
+.target/
+.vscode/
