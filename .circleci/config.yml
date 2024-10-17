@@ -11,7 +11,7 @@ jobs:
           command: mvn -version
       - run:
           name: Build with Maven
-          command: mvn clean package
+          command: mvn clean package -DskipTests
   test:
     docker:
       - image: circleci/openjdk:8-jdk
