@@ -18,7 +18,7 @@ public class IPokemonMetadataProviderTest {
 
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
-        PokemonMetadata PikachuMetadata = new PokemonMetadata(1, "Pikachu", 55, 40, 35);
+        PokemonMetadata PikachuMetadata = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
         when(metadataProvider.getPokemonMetadata(1)).thenReturn(PikachuMetadata);
         
         PokemonMetadata actualMetadata = metadataProvider.getPokemonMetadata(1);

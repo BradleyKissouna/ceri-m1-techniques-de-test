@@ -26,12 +26,12 @@ public class IPokemonFactoryTest {
         when(pikachu.getCandy()).thenReturn(25);
 
         Pokemon bulbizarre = mock(Pokemon.class);
-        when(bulbizarre.getIndex()).thenReturn(2);
+        when(bulbizarre.getIndex()).thenReturn(0);
         when(bulbizarre.getName()).thenReturn("Bulbizarre");
-        when(bulbizarre.getCp()).thenReturn(400);
-        when(bulbizarre.getHp()).thenReturn(50);
-        when(bulbizarre.getDust()).thenReturn(200);
-        when(bulbizarre.getCandy()).thenReturn(20);
+        when(bulbizarre.getCp()).thenReturn(613);
+        when(bulbizarre.getHp()).thenReturn(64);
+        when(bulbizarre.getDust()).thenReturn(4000);
+        when(bulbizarre.getCandy()).thenReturn(4);
 
         Pokemon salamèche = mock(Pokemon.class);
         when(salamèche.getIndex()).thenReturn(3);
@@ -42,11 +42,11 @@ public class IPokemonFactoryTest {
         when(salamèche.getCandy()).thenReturn(15);
 
         when(pokemonFactory.createPokemon(1, 500, 60, 300, 25)).thenReturn(pikachu);
-        when(pokemonFactory.createPokemon(2, 400, 50, 200, 20)).thenReturn(bulbizarre);
+        when(pokemonFactory.createPokemon(0, 613, 64, 4000, 4)).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(3, 600, 55, 250, 15)).thenReturn(salamèche);
 
         Pokemon actualPikachu = pokemonFactory.createPokemon(1, 500, 60, 300, 25);
-        Pokemon actualBulbizarre = pokemonFactory.createPokemon(2, 400, 50, 200, 20);
+        Pokemon actualBulbizarre = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
         Pokemon actualSalamèche = pokemonFactory.createPokemon(3, 600, 55, 250, 15);
 
         assertEquals(pikachu, actualPikachu);
@@ -54,7 +54,7 @@ public class IPokemonFactoryTest {
         assertEquals(salamèche, actualSalamèche);
 
         assertEquals("Pikachu", actualPikachu.getName());
-        assertEquals(400, actualBulbizarre.getCp());
+        assertEquals(613, actualBulbizarre.getCp());
         assertEquals(55, actualSalamèche.getHp());
     }
 }
