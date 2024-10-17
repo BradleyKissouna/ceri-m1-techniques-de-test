@@ -20,6 +20,8 @@ jobs:
       - run:
           name: Test with Maven
           command: mvn test
+  orbs:
+    codecov: codecov/codecov@4.0.1
 
 workflows:
   build_and_test:
@@ -31,3 +33,7 @@ workflows:
       - test:
           requires:
             - build
+  upload-to-codecov:
+    jobs:
+      - checkout
+      - codecov/upload
