@@ -10,7 +10,7 @@ jobs:
           name: Setup Maven
           command: mvn -version
       - run:
-          name: Build with Maven
+          name: Build With Maven
           command: mvn clean package -DskipTests
   test:
     docker:
@@ -18,22 +18,30 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test with Maven
-          command: mvn test
+          name: Test With Maven
+          command: mvn test jacoco:report
+      - run:
+          name: Generate JaCoCo Coverage Report
+          command: mvn jacoco:report
   deploy:
-    codecov: codecov/codecov@4.0.1
+    docker:
+      - image: cimg/openjdk:23.0
+    steps:
+      - checkout
+      - run:
+          name: Upload Coverage to Codecov
+          command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
-  build_and_test:
+  build_and_test_and_deploy:
     jobs:
       - build:
         filters:
-            branches:
-              only: master
+          branches:
+            only: master
       - test:
           requires:
             - build
-  upload_to_codecov:
-    jobs:
-      - checkout
-      - codecov/upload
+      - deploy:
+          requires:
+            - test
