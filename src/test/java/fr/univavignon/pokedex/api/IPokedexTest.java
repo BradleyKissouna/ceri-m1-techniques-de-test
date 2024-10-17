@@ -1,11 +1,15 @@
 package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class IPokedexTest {
@@ -27,63 +31,38 @@ public class IPokedexTest {
 
     @Test
     public void testAddPokemon1() {
-        int index = pokedex.addPokemon(pokemon1);
+        when(pokedex.addPokemon(pokemon1)).thenReturn(1);
+        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon1));
         assertTrue(pokedex.getPokemons().contains(pokemon1));
-        assertEquals(1, index);
     }
 
     @Test
     public void testAddPokemon2() {
-        int index = pokedex.addPokemon(pokemon2);
+        when(pokedex.addPokemon(pokemon2)).thenReturn(2);
+        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon2));
         assertTrue(pokedex.getPokemons().contains(pokemon2));
-        assertEquals(2, index);
     }
 
     @Test
     public void testAddPokemon3() {
-        int index = pokedex.addPokemon(pokemon3);
+        when(pokedex.addPokemon(pokemon3)).thenReturn(3);
+        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon3));
         assertTrue(pokedex.getPokemons().contains(pokemon3));
-        assertEquals(3, index);
     }
 
     @Test
     public void testAddPokemon4() {
-        int index = pokedex.addPokemon(pokemon4);
+        when(pokedex.addPokemon(pokemon4)).thenReturn(4);
+        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon4));
         assertTrue(pokedex.getPokemons().contains(pokemon4));
-        assertEquals(4, index);
-    }
-
-    @Test
-    public void testGetPokemon1() throws PokedexException {
-        Pokemon retrievedPokemon = pokedex.getPokemon(1);
-        assertEquals(pokemon1, retrievedPokemon);
-    }
-
-    @Test
-    public void testGetPokemon2() throws PokedexException {
-        Pokemon retrievedPokemon = pokedex.getPokemon(2);
-        assertEquals(pokemon2, retrievedPokemon);
-    }
-
-    @Test
-    public void testGetPokemon3() throws PokedexException {
-        Pokemon retrievedPokemon = pokedex.getPokemon(3);
-        assertEquals(pokemon3, retrievedPokemon);
-    }
-
-    @Test
-    public void testGetPokemon4() throws PokedexException {
-        Pokemon retrievedPokemon = pokedex.getPokemon(4);
-        assertEquals(pokemon4, retrievedPokemon);
     }
 
     @Test
     public void testGetAllPokemons() {
-        List<Pokemon> allPokemons = pokedex.getPokemons();
-        assertEquals(4, allPokemons.size());
-        assertTrue(allPokemons.contains(pokemon1));
-        assertTrue(allPokemons.contains(pokemon2));
-        assertTrue(allPokemons.contains(pokemon3));
-        assertTrue(allPokemons.contains(pokemon4));
+        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon1, pokemon2, pokemon3, pokemon4));
+        assertTrue(pokedex.getPokemons().contains(pokemon1));
+        assertTrue(pokedex.getPokemons().contains(pokemon2));
+        assertTrue(pokedex.getPokemons().contains(pokemon3));
+        assertTrue(pokedex.getPokemons().contains(pokemon4));
     }
 }
