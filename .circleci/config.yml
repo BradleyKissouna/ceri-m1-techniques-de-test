@@ -33,6 +33,9 @@ jobs:
       - image: cimg/openjdk:23.0
     steps:
       - checkout
+      - run:
+        name: Upload JaCoCo Coverage Report
+          command: mvn clean test
       - codecov/upload
 
 workflows:
