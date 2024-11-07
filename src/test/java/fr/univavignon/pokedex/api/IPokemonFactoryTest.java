@@ -1,8 +1,13 @@
 package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,5 +61,71 @@ public class IPokemonFactoryTest {
         assertEquals("Pikachu", actualPikachu.getName());
         assertEquals(613, actualBulbizarre.getCp());
         assertEquals(55, actualSalamèche.getHp());
+    }
+
+    @Test
+    public void testGetPokemonInfo() {
+        Pokemon pikachuFactory = mock(Pokemon.class);
+        when(pikachuFactory.getIndex()).thenReturn(1);
+        when(pikachuFactory.getName()).thenReturn("Pikachu");
+        when(pikachuFactory.getCp()).thenReturn(500);
+        when(pikachuFactory.getHp()).thenReturn(60);
+        when(pikachuFactory.getDust()).thenReturn(300);
+        when(pikachuFactory.getCandy()).thenReturn(25);
+
+        PokemonMetadata pikachuMetadata = new PokemonMetadata(1, "Pikachu", 500, 60, 300);
+
+        when(pokemonFactory.createPokemon(1, 500, 60, 300, 25)).thenReturn(pikachuFactory);
+        
+        Pokemon actualPikachu = new Pokemon(pikachuMetadata.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp(), pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
+
+        assertEquals("Pikachu", actualPikachu.getName());
+        assertEquals(500, actualPikachu.getCp());
+        assertEquals(60, actualPikachu.getHp());
+        assertEquals(300, actualPikachu.getDust());
+        assertEquals(25, actualPikachu.getCandy());
+        assertEquals(0.9, actualPikachu.getIv(), 0.01);
+    }
+
+    @Test
+    public void testPokemonComparators() {
+        // Créer des objets Pokémon simulés
+        Pokemon pikachu = mock(Pokemon.class);
+        when(pikachu.getIndex()).thenReturn(1);
+        when(pikachu.getName()).thenReturn("Pikachu");
+        when(pikachu.getCp()).thenReturn(500);
+
+        Pokemon bulbizarre = mock(Pokemon.class);
+        when(bulbizarre.getIndex()).thenReturn(0);
+        when(bulbizarre.getName()).thenReturn("Bulbizarre");
+        when(bulbizarre.getCp()).thenReturn(613);
+
+        Pokemon salamèche = mock(Pokemon.class);
+        when(salamèche.getIndex()).thenReturn(3);
+        when(salamèche.getName()).thenReturn("Salamèche");
+        when(salamèche.getCp()).thenReturn(600);
+
+        List<Pokemon> pokemons = new ArrayList<>();
+        pokemons.add(pikachu);
+        pokemons.add(bulbizarre);
+        pokemons.add(salamèche);
+
+        // Test du comparateur par nom
+        Collections.sort(pokemons, PokemonComparators.NAME);
+        assertTrue(pokemons.get(0).getName().equals("Bulbizarre"));
+        assertTrue(pokemons.get(1).getName().equals("Pikachu"));
+        assertTrue(pokemons.get(2).getName().equals("Salamèche"));
+
+        // Test du comparateur par index
+        Collections.sort(pokemons, PokemonComparators.INDEX);
+        assertTrue(pokemons.get(0).getIndex() == 0);
+        assertTrue(pokemons.get(1).getIndex() == 1);
+        assertTrue(pokemons.get(2).getIndex() == 3);
+
+        // Test du comparateur par CP
+        Collections.sort(pokemons, PokemonComparators.CP);
+        assertTrue(pokemons.get(0).getCp() == 500);
+        assertTrue(pokemons.get(1).getCp() == 600);
+        assertTrue(pokemons.get(2).getCp() == 613);
     }
 }
