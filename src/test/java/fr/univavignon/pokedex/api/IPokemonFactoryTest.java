@@ -59,15 +59,25 @@ public class IPokemonFactoryTest {
     }
 
     @Test
-    public void testGetPokemonsInfo() {
+    public void testGetPokemonInfo() {
+        Pokemon pikachuFactory = mock(Pokemon.class);
+        when(pikachuFactory.getIndex()).thenReturn(1);
+        when(pikachuFactory.getName()).thenReturn("Pikachu");
+        when(pikachuFactory.getCp()).thenReturn(500);
+        when(pikachuFactory.getHp()).thenReturn(60);
+        when(pikachuFactory.getDust()).thenReturn(300);
+        when(pikachuFactory.getCandy()).thenReturn(25);
+
         PokemonMetadata pikachuMetadata = new PokemonMetadata(1, "Pikachu", 500, 60, 300);
-        Pokemon pikachuFactory = pokemonFactory.createPokemon(pikachuMetadata.getIndex(), 500, 60, 300, 0);
-        Pokemon actualPikachu = new Pokemon(pikachuMetadata.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp() ,pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
+
+        when(pokemonFactory.createPokemon(1, 500, 60, 300, 25)).thenReturn(pikachuFactory);
         
+        Pokemon actualPikachu = new Pokemon(pikachuMetadata.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp(), pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
+
         assertEquals("Pikachu", actualPikachu.getName());
         assertEquals(500, actualPikachu.getCp());
         assertEquals(60, actualPikachu.getHp());
         assertEquals(300, actualPikachu.getDust());
-        assertEquals(0, actualPikachu.getCandy());
+        assertEquals(25, actualPikachu.getCandy());
     }
 }
