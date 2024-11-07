@@ -27,14 +27,6 @@ jobs:
       - run:
           name: Generate JaCoCo Coverage Report
           command: mvn jacoco:report
-
-  deploy:
-    docker:
-      - image: cimg/openjdk:23.0
-    steps:
-      - run:
-        name: Upload JaCoCo Coverage Report
-        command: mvn clean test
       - codecov/upload
 
 workflows:
@@ -47,6 +39,3 @@ workflows:
       - test:
           requires:
             - build
-      - deploy:
-          requires:
-            - test
