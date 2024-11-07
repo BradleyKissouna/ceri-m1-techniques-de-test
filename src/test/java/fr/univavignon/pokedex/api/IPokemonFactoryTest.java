@@ -60,13 +60,7 @@ public class IPokemonFactoryTest {
 
     @Test
     public void testGetPokemonsInfo() {
-        PokemonMetadata pikachuMetadata = mock(PokemonMetadata.class);
-        when(pikachuMetadata.getIndex()).thenReturn(1);
-        when(pikachuMetadata.getName()).thenReturn("Pikachu");
-        when(pikachuMetadata.getAttack()).thenReturn(500);
-        when(pikachuMetadata.getDefense()).thenReturn(60);
-        when(pikachuMetadata.getStamina()).thenReturn(300);
-
+        PokemonMetadata pikachuMetadata = new PokemonMetadata(1, "Pikachu", 500, 60, 300);
         Pokemon pikachuFactory = pokemonFactory.createPokemon(pikachuMetadata.getIndex(), 500, 60, 300, 0);
         Pokemon actualPikachu = new Pokemon(pikachuFactory.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp() ,pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
         
