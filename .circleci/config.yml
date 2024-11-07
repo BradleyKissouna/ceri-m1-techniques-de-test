@@ -35,7 +35,7 @@ jobs:
       - checkout
       - run:
         name: Upload JaCoCo Coverage Report
-          command: mvn clean test
+        command: mvn clean test
       - codecov/upload
 
 workflows:
