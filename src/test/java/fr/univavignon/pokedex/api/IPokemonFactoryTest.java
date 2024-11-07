@@ -79,5 +79,6 @@ public class IPokemonFactoryTest {
         assertEquals(60, actualPikachu.getHp());
         assertEquals(300, actualPikachu.getDust());
         assertEquals(25, actualPikachu.getCandy());
+        assertEquals(0.9, actualPikachu.getIv(), 0.01);
     }
 }
