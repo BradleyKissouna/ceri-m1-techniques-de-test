@@ -1,8 +1,13 @@
 package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,5 +85,47 @@ public class IPokemonFactoryTest {
         assertEquals(300, actualPikachu.getDust());
         assertEquals(25, actualPikachu.getCandy());
         assertEquals(0.9, actualPikachu.getIv(), 0.01);
+    }
+
+    @Test
+    public void testPokemonComparators() {
+        // Créer des objets Pokémon simulés
+        Pokemon pikachu = mock(Pokemon.class);
+        when(pikachu.getIndex()).thenReturn(1);
+        when(pikachu.getName()).thenReturn("Pikachu");
+        when(pikachu.getCp()).thenReturn(500);
+
+        Pokemon bulbizarre = mock(Pokemon.class);
+        when(bulbizarre.getIndex()).thenReturn(0);
+        when(bulbizarre.getName()).thenReturn("Bulbizarre");
+        when(bulbizarre.getCp()).thenReturn(613);
+
+        Pokemon salamèche = mock(Pokemon.class);
+        when(salamèche.getIndex()).thenReturn(3);
+        when(salamèche.getName()).thenReturn("Salamèche");
+        when(salamèche.getCp()).thenReturn(600);
+
+        List<Pokemon> pokemons = new ArrayList<>();
+        pokemons.add(pikachu);
+        pokemons.add(bulbizarre);
+        pokemons.add(salamèche);
+
+        // Test du comparateur par nom
+        Collections.sort(pokemons, PokemonComparators.NAME);
+        assertTrue(pokemons.get(0).getName().equals("Bulbizarre"));
+        assertTrue(pokemons.get(1).getName().equals("Pikachu"));
+        assertTrue(pokemons.get(2).getName().equals("Salamèche"));
+
+        // Test du comparateur par index
+        Collections.sort(pokemons, PokemonComparators.INDEX);
+        assertTrue(pokemons.get(0).getIndex() == 0);
+        assertTrue(pokemons.get(1).getIndex() == 1);
+        assertTrue(pokemons.get(2).getIndex() == 3);
+
+        // Test du comparateur par CP
+        Collections.sort(pokemons, PokemonComparators.CP);
+        assertTrue(pokemons.get(0).getCp() == 500);
+        assertTrue(pokemons.get(1).getCp() == 600);
+        assertTrue(pokemons.get(2).getCp() == 613);
     }
 }
