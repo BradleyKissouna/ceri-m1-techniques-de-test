@@ -29,6 +29,16 @@ public class IPokemonTrainerFactoryTest {
         assertEquals(expectedTrainer, actualTrainer);
     }
 
+    public void testGetPokemonTrainerInfo() {
+        IPokedex pokedex = mock(IPokedex.class); // Création d'un pokedex mocké
+        PokemonTrainer expectedTrainer = new PokemonTrainer("Zen", Team.INSTINCT, pokedex);
+        when(trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory)).thenReturn(expectedTrainer);
+        
+        assertEquals(expectedTrainer.getName(), "Zen");
+        assertEquals(expectedTrainer.getTeam(), Team.INSTINCT);
+        assertEquals(expectedTrainer.getPokedex(), pokedex);
+    }
+
     @Test
     public void testCreateMultiplePokemonTrainers() {
         IPokedex pokedex1 = mock(IPokedex.class);
@@ -46,6 +56,8 @@ public class IPokemonTrainerFactoryTest {
         assertEquals(trainer1, trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory));
         assertEquals(trainer2, trainerFactory.createTrainer("Misty", Team.INSTINCT, pokedexFactory));
         assertEquals(trainer3, trainerFactory.createTrainer("Brock", Team.INSTINCT, pokedexFactory));
+
+
     }
 
     @Test
