@@ -26,13 +26,13 @@ jobs:
   deploy:
     docker:
       - image: cimg/openjdk:23.0
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - checkout
       - run:
           - name: Upload Coverage to Codecov
             uses: codecov/codecov@4.0.1
-              env:
-                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
             command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
