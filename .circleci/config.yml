@@ -29,8 +29,8 @@ jobs:
           command: mvn jacoco:report
 
   deploy:
-    environment:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    docker:
+      - image: cimg/openjdk:23.0
     steps:
       - checkout
       - codecov/upload
