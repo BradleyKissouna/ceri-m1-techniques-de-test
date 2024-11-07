@@ -29,6 +29,7 @@ public class IPokemonTrainerFactoryTest {
         assertEquals(expectedTrainer, actualTrainer);
     }
 
+    @Test
     public void testGetPokemonTrainerInfo() {
         IPokedex pokedex = mock(IPokedex.class); // Création d'un pokedex mocké
         PokemonTrainer expectedTrainer = new PokemonTrainer("Zen", Team.INSTINCT, pokedex);

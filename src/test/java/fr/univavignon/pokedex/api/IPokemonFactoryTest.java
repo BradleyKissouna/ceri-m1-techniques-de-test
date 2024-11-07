@@ -57,4 +57,21 @@ public class IPokemonFactoryTest {
         assertEquals(613, actualBulbizarre.getCp());
         assertEquals(55, actualSalamèche.getHp());
     }
+
+    @Test
+    public void testGetPokemonsInfo() {
+        PokemonMetadata pikachuMetadata = mock(PokemonMetadata.class);
+        when(pikachuMetadata.getIndex()).thenReturn(1);
+        when(pikachuMetadata.getName()).thenReturn("Pikachu");
+        when(pikachuMetadata.getAttack()).thenReturn(500);
+        when(pikachuMetadata.getDefense()).thenReturn(60);
+        when(pikachuMetadata.getStamina()).thenReturn(300);
+
+        Pokemon actualPikachu = pokemonFactory.createPokemon(pikachuMetadata.getIndex(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), 0);
+        assertEquals("Pikachu", actualPikachu.getName());
+        assertEquals(500, actualPikachu.getCp());
+        assertEquals(60, actualPikachu.getHp());
+        assertEquals(300, actualPikachu.getDust());
+        assertEquals(0, actualPikachu.getCandy());
+    }
 }
