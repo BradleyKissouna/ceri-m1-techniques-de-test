@@ -1,5 +1,8 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
+**Nom et prénom** : Kissouna Bradley  
+**Groupe** : ILSEN
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
@@ -35,3 +38,8 @@ Pour chaque rendu vous devez créer un tag à partir du commit qui correspond à
 Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin de séance sera celui considéré.
 
 [^1]: Si vous n’êtes vraiment pas à l’aise avec cet outil nous vous conseillons quand même vivement de vous y mettre.
+
+## Badges
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/BradleyKissouna/ceri-m1-techniques-de-test/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/BradleyKissouna/ceri-m1-techniques-de-test/tree/develop) 
+[![codecov](https://codecov.io/gh/BradleyKissouna/ceri-m1-techniques-de-test/branch/develop/graph/badge.svg?token=QMX0WKC3RF)](https://codecov.io/gh/BradleyKissouna/ceri-m1-techniques-de-test)
