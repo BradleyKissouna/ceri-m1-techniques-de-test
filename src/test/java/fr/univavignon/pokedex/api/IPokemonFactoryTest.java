@@ -62,7 +62,7 @@ public class IPokemonFactoryTest {
     public void testGetPokemonsInfo() {
         PokemonMetadata pikachuMetadata = new PokemonMetadata(1, "Pikachu", 500, 60, 300);
         Pokemon pikachuFactory = pokemonFactory.createPokemon(pikachuMetadata.getIndex(), 500, 60, 300, 0);
-        Pokemon actualPikachu = new Pokemon(pikachuFactory.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp() ,pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
+        Pokemon actualPikachu = new Pokemon(pikachuMetadata.getIndex(), pikachuMetadata.getName(), pikachuMetadata.getAttack(), pikachuMetadata.getDefense(), pikachuMetadata.getStamina(), pikachuFactory.getCp() ,pikachuFactory.getHp(), pikachuFactory.getDust(), pikachuFactory.getCandy(), 0.9);
         
         assertEquals("Pikachu", actualPikachu.getName());
         assertEquals(500, actualPikachu.getCp());
