@@ -59,7 +59,7 @@ public final class Pokemon extends PokemonMetadata {
 	public int getCp() {
 		return cp;
 	}
-	
+
 	/** HP getter. **/
 	public int getHp() {
 		return hp;
@@ -74,10 +74,10 @@ public final class Pokemon extends PokemonMetadata {
 	public int getCandy() {
 		return candy;
 	}
-	
+
 	/** IV getter. **/
 	public double getIv() {
 		return iv;
 	}
-	
+
 }

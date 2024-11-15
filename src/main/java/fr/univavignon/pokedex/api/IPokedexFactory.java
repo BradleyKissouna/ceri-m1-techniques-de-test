@@ -16,5 +16,5 @@ public interface IPokedexFactory {
 	 * @return Created pokedex instance.
 	 */
 	IPokedex createPokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory);
-	
+
 }
