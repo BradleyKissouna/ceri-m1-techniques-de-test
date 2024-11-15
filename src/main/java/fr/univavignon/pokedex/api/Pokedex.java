@@ -7,9 +7,13 @@ import java.util.List;
 
 public class Pokedex implements IPokedex {
 
+    private final PokemonMetadataProvider metadataProvider;
+    private final PokemonFactory pokemonFactory;
     private final List<Pokemon> pokemons;
 
-    public Pokedex() {
+    public Pokedex(PokemonMetadataProvider metadataProvider, PokemonFactory pokemonFactory) {
+        this.metadataProvider = metadataProvider;
+        this.pokemonFactory = pokemonFactory;
         this.pokemons = new ArrayList<>();
     }
 
@@ -21,7 +25,7 @@ public class Pokedex implements IPokedex {
     @Override
     public int addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
-        return pokemons.size() - 1; // Retourne l'index de ce Pokémon
+        return pokemons.size() - 1; // Retourne l'index du Pokémon ajouté
     }
 
     @Override
@@ -34,27 +38,24 @@ public class Pokedex implements IPokedex {
 
     @Override
     public List<Pokemon> getPokemons() {
-        return pokemons;
+        return new ArrayList<>(pokemons); // Retourne une copie modifiable
     }
 
     @Override
     public List<Pokemon> getPokemons(Comparator<Pokemon> order) {
-        List<Pokemon> sortedPokemons = new ArrayList<>(pokemons);
-        sortedPokemons.sort(order);
-        return sortedPokemons;
+        List<Pokemon> sortedList = new ArrayList<>(pokemons);
+        sortedList.sort(order);
+        return sortedList;
     }
 
-    // Méthodes héritées de IPokemonMetadataProvider et IPokemonFactory
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        // TODO
-		return null;
+        return metadataProvider.getPokemonMetadata(index);
     }
 
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
-        // TODO
-		return null;
+        return pokemonFactory.createPokemon(index, cp, hp, dust, candy);
     }
 
 }
