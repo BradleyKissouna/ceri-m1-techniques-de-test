@@ -2,8 +2,6 @@ package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -28,16 +26,12 @@ public class IPokemonMetadataProviderTest {
     }
 
     public void testGetPokemonMetadataInvalidIndex() throws PokedexException {
-        when(metadataProvider.getPokemonMetadata(0)).thenThrow(new PokedexException("Index out of range"));
-    
         assertThrows(PokedexException.class, () -> {
             metadataProvider.getPokemonMetadata(0);
         });
-
-        when(metadataProvider.getPokemonMetadata(999)).thenThrow(new PokedexException("Index out of range"));
-    
         assertThrows(PokedexException.class, () -> {
             metadataProvider.getPokemonMetadata(999);
         });
     }
+
 }
