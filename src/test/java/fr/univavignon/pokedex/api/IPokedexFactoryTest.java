@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class IPokedexFactoryTest {
     private PokedexFactory pokedexFactory;
-    private IPokemonMetadataProvider metadataProvider;
+    private PokemonMetadataProvider metadataProvider;
     private PokemonFactory pokemonFactory;
 
     @Before
