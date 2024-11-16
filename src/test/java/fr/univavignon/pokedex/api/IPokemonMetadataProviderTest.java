@@ -33,5 +33,11 @@ public class IPokemonMetadataProviderTest {
         assertThrows(PokedexException.class, () -> {
             metadataProvider.getPokemonMetadata(0);
         });
+
+        when(metadataProvider.getPokemonMetadata(999)).thenThrow(new PokedexException("Index out of range"));
+    
+        assertThrows(PokedexException.class, () -> {
+            metadataProvider.getPokemonMetadata(999);
+        });
     }
 }
