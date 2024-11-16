@@ -133,7 +133,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        if (index < 0 || index >= metadataMap.size()) {
+        if (index <= 0 || index >= metadataMap.size()) {
             throw new PokedexException("Index out of range");
         }
         return metadataMap.get(index);

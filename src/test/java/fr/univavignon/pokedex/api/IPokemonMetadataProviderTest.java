@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IPokemonMetadataProviderTest {
-    private IPokemonMetadataProvider metadataProvider;
+    private PokemonMetadataProvider metadataProvider;
 
     @Before
     public void setUp() {
