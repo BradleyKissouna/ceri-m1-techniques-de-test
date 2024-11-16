@@ -5,6 +5,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,12 +14,16 @@ public class IPokedexTest {
     private Pokedex pokedex;
     private PokemonMetadataProvider metadataProvider;
     private Pokemon pikachu;
+    private Pokemon bulbisar;
+    private Pokemon ivysaur;
 
     @Before
     public void setUp() {
         metadataProvider = new PokemonMetadataProvider();
         pokedex = new Pokedex(metadataProvider, new PokemonFactory(metadataProvider));
         pikachu = new Pokemon(150, "Pikachu", 55, 40, 35, 500, 60, 300, 25, 0.9);
+        bulbisar = new Pokemon(1, "Bulbasaur", 45, 49, 49, 345, 65, 65, 45, 0.9);
+        ivysaur = new Pokemon(2, "Ivysaur", 60, 62, 63, 405, 80, 80, 60, 0.9);
     }
 
     @Test
@@ -39,6 +45,8 @@ public class IPokedexTest {
         pokedex.addPokemon(pikachu);
         assertEquals(pikachu, pokedex.getPokemon(0));
 
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
+
         assertThrows(PokedexException.class, () -> pokedex.getPokemon(1));
     }
 
@@ -46,6 +54,19 @@ public class IPokedexTest {
     public void testGetPokemons() {
         pokedex.addPokemon(pikachu);
         assertEquals(pikachu, pokedex.getPokemons().get(0));
+    }
+
+    @Test
+    public void testGetPokemonsWithComparator() {
+        pokedex.addPokemon(pikachu);
+        pokedex.addPokemon(ivysaur);
+        pokedex.addPokemon(bulbisar);
+
+        List<Pokemon> listParIndex = pokedex.getPokemons(PokemonComparators.NAME);
+
+        assertEquals(bulbisar, listParIndex.get(0));
+        assertEquals(ivysaur, listParIndex.get(1));
+        assertEquals(pikachu, listParIndex.get(2));
     }
 
     @Test
