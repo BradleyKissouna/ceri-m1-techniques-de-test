@@ -2,7 +2,8 @@ package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -13,24 +14,24 @@ public class IPokemonMetadataProviderTest {
 
     @Before
     public void setUp() {
-        metadataProvider = mock(IPokemonMetadataProvider.class);
+        metadataProvider = new PokemonMetadataProvider();
     }
 
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
-        PokemonMetadata PikachuMetadata = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
-        when(metadataProvider.getPokemonMetadata(1)).thenReturn(PikachuMetadata);
-        
-        PokemonMetadata actualMetadata = metadataProvider.getPokemonMetadata(1);
-        assertEquals(PikachuMetadata, actualMetadata);
+        PokemonMetadata bulbasaur = metadataProvider.getPokemonMetadata(1);
+        assertEquals(1, bulbasaur.getIndex());
+        assertEquals("Bulbasaur", bulbasaur.getName());
+        assertEquals(49, bulbasaur.getAttack());
+        assertEquals(49, bulbasaur.getDefense());
+        assertEquals(45, bulbasaur.getStamina());
     }
 
-    @Test
     public void testGetPokemonMetadataInvalidIndex() throws PokedexException {
-        when(metadataProvider.getPokemonMetadata(99)).thenThrow(new PokedexException("Invalid index"));
-
+        when(metadataProvider.getPokemonMetadata(0)).thenThrow(new PokedexException("Index out of range"));
+    
         assertThrows(PokedexException.class, () -> {
-            metadataProvider.getPokemonMetadata(99);
+            metadataProvider.getPokemonMetadata(0);
         });
     }
 }
