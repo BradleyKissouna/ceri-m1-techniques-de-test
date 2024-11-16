@@ -11,6 +11,10 @@ public class PokemonFactory implements IPokemonFactory {
         this.metadataProvider = metadataProvider;
     }
 
+    public IPokemonMetadataProvider getMetadataProvider() {
+        return metadataProvider;
+    }
+
     // Méthode pour calculer les IV d'un Pokémon (Individual Values) entre 0 et 15
     private static int calculateIV() {
         Random random = new Random();
