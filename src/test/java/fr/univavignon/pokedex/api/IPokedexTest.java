@@ -1,6 +1,7 @@
 package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -72,6 +73,10 @@ public class IPokedexTest {
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
         assertTrue(pokedex.getPokemonMetadata(1).getName().equals("Bulbasaur"));
+
+        // Test with an invalid index (less than 0)
+        int invalidIndexLessThan0 = -1;
+        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndexLessThan0));
     }
 
     @Test
