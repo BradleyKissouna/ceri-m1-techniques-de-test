@@ -20,13 +20,13 @@ public class IPokemonFactoryTest {
 
     @Test
     public void testCreatePokemon() {
-        Pokemon missingno = pokemonFactory.createPokemon(0, 0, 0, 0, 0);
-        assertEquals("MISSINGNO", missingno.getName());
-        assertEquals(0, missingno.getCp());
-        assertEquals(0, missingno.getHp());
-        assertEquals(0, missingno.getDust());
-        assertEquals(0, missingno.getCandy());
-        assertEquals(0, missingno.getIv(), 0.1);
+        Pokemon bulbasaur = pokemonFactory.createPokemon(1, 0, 0, 0, 0);
+        assertEquals("Bulbasaur", bulbasaur.getName());
+        assertEquals(0, bulbasaur.getCp());
+        assertEquals(0, bulbasaur.getHp());
+        assertEquals(0, bulbasaur.getDust());
+        assertEquals(0, bulbasaur.getCandy());
+        assertEquals(1, bulbasaur.getIv(), 0.1);
     }
 
     @Test

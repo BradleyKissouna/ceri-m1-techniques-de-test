@@ -81,7 +81,7 @@ public class IPokedexTest {
 
     @Test
     public void testCreatePokemon() throws PokedexException {
-        pokedex.createPokemon(0, 0, 0, 0, 0);
+        assertThrows(NullPointerException.class, () -> pokedex.createPokemon(0, 0, 0, 0, 0));
         assertEquals(0, pokedex.size());
     }
 
