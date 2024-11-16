@@ -24,9 +24,10 @@ public class IPokemonMetadataProviderTest {
         assertEquals(45, bulbasaur.getStamina());
     }
 
+    @Test
     public void testGetPokemonMetadataInvalidIndex() throws PokedexException {
         assertThrows(PokedexException.class, () -> {
-            metadataProvider.getPokemonMetadata(0);
+            metadataProvider.getPokemonMetadata(-1);
         });
         assertThrows(PokedexException.class, () -> {
             metadataProvider.getPokemonMetadata(999);
