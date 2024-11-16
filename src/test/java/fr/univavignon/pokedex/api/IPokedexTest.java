@@ -2,6 +2,7 @@ package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -24,6 +25,38 @@ public class IPokedexTest {
         assertEquals(pokedex.addPokemon(pikachu), 0);
         assertSame(pikachu, pokedex.getPokemons().get(0));
         assertTrue(pokedex.getPokemons().contains(pikachu));
+    }
+
+    @Test
+    public void testGetPokedexInfo() throws PokedexException {
+        assertEquals(0, pokedex.size());
+        pokedex.addPokemon(pikachu);
+        assertEquals(1, pokedex.size());
+    }
+
+    @Test
+    public void testGetPokemon() throws PokedexException {
+        pokedex.addPokemon(pikachu);
+        assertEquals(pikachu, pokedex.getPokemon(0));
+
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(1));
+    }
+
+    @Test
+    public void testGetPokemons() {
+        pokedex.addPokemon(pikachu);
+        assertEquals(pikachu, pokedex.getPokemons().get(0));
+    }
+
+    @Test
+    public void testGetPokemonMetadata() throws PokedexException {
+        assertTrue(pokedex.getPokemonMetadata(1).getName().equals("Bulbasaur"));
+    }
+
+    @Test
+    public void testCreatePokemon() throws PokedexException {
+        pokedex.createPokemon(0, 0, 0, 0, 0);
+        assertEquals(0, pokedex.size());
     }
 
 }
