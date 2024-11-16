@@ -26,6 +26,7 @@ public class IPokemonFactoryTest {
         assertEquals(0, missingno.getHp());
         assertEquals(0, missingno.getDust());
         assertEquals(0, missingno.getCandy());
+        assertEquals(0, missingno.getIv(), 0.1);
     }
 
     @Test
