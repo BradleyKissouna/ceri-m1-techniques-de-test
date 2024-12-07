@@ -48,6 +48,29 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <config>
+                        <module name="Checker">
+                            <module name="TreeWalker">
+                                <module name="JavadocStyle"/>
+                                <module name="Indentation">
+                                    <property name="basicOffset" value="4"/>
+                                    <property name="tabWidth" value="4"/>
+                                </module>
+                                <module name="LineLength">
+                                    <property name="max" value="120"/>
+                                </module>
+                            </module>
+                        </module>
+                    </config>
+                    <reportOutputFile>target/checkstyle-report.html</reportOutputFile>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
