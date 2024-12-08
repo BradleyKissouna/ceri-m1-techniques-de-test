@@ -31,10 +31,15 @@ jobs:
           name: Generate and copy Checkstyle report with badge
           command: |
             mvn checkstyle:checkstyle
-            ls -R target/site/
             python scripts/checkstyle_to_json.py
-            mkdir -p docs
-            cp target/site/checkstyle.html docs/checkstyle-report.html
+      - run:
+          name: Publish GitHub Pages
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          command: |
+            git add docs/
+            git commit -m "Update Checkstyle badge"
+            git push
       - codecov/upload
 
 workflows:
