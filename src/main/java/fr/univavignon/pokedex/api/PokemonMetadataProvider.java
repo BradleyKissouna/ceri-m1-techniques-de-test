@@ -3,10 +3,25 @@ package fr.univavignon.pokedex.api;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of the IPokemonMetadataProvider interface.
+ * Provides metadata for Pokémon by index.
+ * 
+ * This class uses a map to store metadata for each Pokémon, which can
+ * be retrieved using the Pokémon's index.
+ * 
+ * @see IPokemonMetadataProvider
+ */
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
+    /**
+     * Map that holds the metadata for each Pokémon by their index.
+     */
     private Map<Integer, PokemonMetadata> metadataMap = new HashMap<>();
 
+    /**
+     * Initializes the metadata map with predefined Pokémon metadata.
+     */
     public PokemonMetadataProvider() {
         metadataMap.put(1, new PokemonMetadata(1, "Bulbasaur", 49, 49, 45));
         metadataMap.put(2, new PokemonMetadata(2, "Ivysaur", 62, 63, 60));
@@ -131,6 +146,13 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
         metadataMap.put(121, new PokemonMetadata(121, "Porygon", 60, 60, 70));
     }
 
+    /**
+     * Retrieves and returns the metadata for the Pokémon denoted by the given index.
+     * 
+     * @param index Index of the Pokémon to retrieve metadata for.
+     * @return Metadata of the Pokémon.
+     * @throws PokedexException If the given index is not valid.
+     */
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
         if (index <= 0 || index >= metadataMap.size()) {

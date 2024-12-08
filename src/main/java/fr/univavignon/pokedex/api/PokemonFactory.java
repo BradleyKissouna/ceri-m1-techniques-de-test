@@ -2,57 +2,75 @@ package fr.univavignon.pokedex.api;
 
 import java.util.Random;
 
+/**
+ * A factory class for creating Pokemon instances, which includes computing their Individual Values (IVs).
+ * Implements the IPokemonFactory interface.
+ * 
+ * @see IPokemonFactory
+ */
 public class PokemonFactory implements IPokemonFactory {
 
     private final IPokemonMetadataProvider metadataProvider;
 
-    // Constructeur qui permet d'injecter un fournisseur de métadonnées
+    /**
+     * Constructor that allows metadata provider injection.
+     * 
+     * @param metadataProvider The metadata provider to use for retrieving Pokemon metadata.
+     */
     public PokemonFactory(IPokemonMetadataProvider metadataProvider) {
         this.metadataProvider = metadataProvider;
     }
 
-    // Méthode pour calculer les IV d'un Pokémon (Individual Values) entre 0 et 15
+    /**
+     * Calculates an Individual Value (IV) for a Pokemon statistic, ranging from 0 to 15.
+     * 
+     * @return A random IV between 0 and 15.
+     */
     private static int calculateIV() {
         Random random = new Random();
-        return random.nextInt(16); // IV compris entre 0 et 15
+        return random.nextInt(16); // IV between 0 and 15
     }
 
     /**
-     * Crée un Pokémon avec des statistiques calculées à partir de ses métadonnées.
+     * Creates a Pokemon with statistics computed from its metadata.
      *
-     * @param index  L'index du Pokémon à créer.
-     * @param cp     Le CP (Combat Power) du Pokémon.
-     * @param hp     Les HP (Health Points) du Pokémon.
-     * @param dust   La poussière nécessaire pour l'amélioration du Pokémon.
-     * @param candy  Les bonbons nécessaires pour l'amélioration du Pokémon.
-     * @return L'instance du Pokémon créé.
+     * This method retrieves the metadata for the specified Pokemon index and uses it to
+     * calculate the base statistics. It then computes random IVs for each statistic and
+     * returns a new Pokemon instance with these values.
+     *
+     * @param index  The index of the Pokemon to create.
+     * @param cp     The Combat Power (CP) of the Pokemon.
+     * @param hp     The Health Points (HP) of the Pokemon.
+     * @param dust   The required dust for upgrading the Pokemon.
+     * @param candy  The required candy for upgrading the Pokemon.
+     * @return The created Pokemon instance with computed statistics.
      */
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
         PokemonMetadata metadata;
 
         try {
-            // Tenter de récupérer les métadonnées du Pokémon à l'index donné
+            // Attempt to retrieve the metadata for the Pokemon at the given index
             metadata = metadataProvider.getPokemonMetadata(index);
 
-            // Récupérer les statistiques de base du Pokémon
+            // Retrieve the base statistics from the metadata
             int baseAttack = metadata.getAttack();
             int baseDefense = metadata.getDefense();
             int baseStamina = metadata.getStamina();
 
-            // Calculer les IV pour chaque statistique
+            // Calculate IVs for each statistic
             int ivAttack = calculateIV();
             int ivDefense = calculateIV();
             int ivStamina = calculateIV();
 
-            // Créer et retourner un nouvel objet Pokémon
+            // Create and return a new Pokemon object
             return new Pokemon(index, metadata.getName(), baseAttack + ivAttack, baseDefense + ivDefense,
                                baseStamina + ivStamina, cp, hp, dust, candy, 1.0);
         } catch (PokedexException e) {
-            // Si une exception est levée, loggez-la et retournez un Pokémon par défaut
-            System.err.println("Erreur lors de la récupération des métadonnées pour l'index " + index + ": " + e.getMessage());
+            // Log the exception and return a default Pokemon if metadata retrieval fails
+            System.err.println("Error retrieving metadata for index " + index + ": " + e.getMessage());
             e.printStackTrace();
-            // Vous pouvez retourner un Pokémon par défaut (par exemple MISSINGNO)
+            // Return a default Pokemon instance (e.g., MISSINGNO)
             return new Pokemon(index, "MISSINGNO", 0, 0, 0, cp, hp, dust, candy, 0.0);
         }
     }

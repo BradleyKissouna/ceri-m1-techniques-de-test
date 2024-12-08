@@ -16,6 +16,6 @@ public interface IPokemonMetadataProvider {
 	 * @return Metadata of the pokemon.
 	 * @throws PokedexException If the given <tt>index</tt> is not valid.
 	 */
-	PokemonMetadata getPokemonMetadata(int index) throws PokedexException;
+	public PokemonMetadata getPokemonMetadata(int index) throws PokedexException;
 
 }

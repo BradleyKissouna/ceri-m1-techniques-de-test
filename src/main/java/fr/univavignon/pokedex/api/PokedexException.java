@@ -14,10 +14,21 @@ public final class PokedexException extends Exception {
     * Default constructor.
     *
     * @param message Error message.
-    * @see Exception#Exception(String)
+    * @see Exception#Exception(String, Throwable)
     */
   public PokedexException(final String message) {
     super(message);
+  }
+
+  /**
+    * Constructor with cause.
+    *
+    * @param message Error message.
+    * @param cause Cause of this exception.
+    * @see Exception#Exception(String, Throwable)
+    */
+  public PokedexException(final String message, final Throwable cause) {
+    super(message, cause);
   }
 
 }

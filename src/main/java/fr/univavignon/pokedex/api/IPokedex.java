@@ -24,6 +24,7 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 	 * 
 	 * @param pokemon Pokemon to add to this pokedex.
 	 * @return Index of this pokemon relative to this pokedex.
+	 * @throws PokedexException If the given <tt>index</tt> is not valid.
 	 */
 	int addPokemon(Pokemon pokemon);
 	
@@ -34,7 +35,7 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 	 * @return Pokemon denoted by the given identifier.
 	 * @throws PokedexException If the given <tt>index</tt> is not valid.
 	 */
-	Pokemon getPokemon(int id) throws PokedexException;
+	Pokemon getPokemon(int id);
 	
 	/**
 	 * Returns an unmodifiable list of all pokemons this pokedex contains.
@@ -42,14 +43,10 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 	 * @return Unmodifiable list of all pokemons.
 	 */
 	List<Pokemon> getPokemons();
-
-	/**
-	 * Returns an unmodifiable list of all pokemons this pokedex contains.
+	
 	 * The list view will be sorted using the given <tt>order</tt>.
-	 * 
 	 * @param order Comparator instance used for sorting the created view.
 	 * @return Sorted unmodifiable list of all pokemons.
-	 */
 	List<Pokemon> getPokemons(Comparator<Pokemon> order);
 	
 }
