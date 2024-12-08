@@ -53,7 +53,6 @@ public class Pokedex implements IPokedex {
      * 
      * @param pokemon Pokemon to add to this Pokedex.
      * @return Index of this Pokemon relative to this Pokedex.
-     * @throws PokedexException If the given Pokemon is not valid.
      */
     @Override
     public int addPokemon(Pokemon pokemon) {
@@ -66,17 +65,11 @@ public class Pokedex implements IPokedex {
      * 
      * @param id Unique Pokedex relative identifier.
      * @return Pokemon denoted by the given identifier.
-     * @throws PokedexException If the given id is not valid.
      */
     @Override
     public Pokemon getPokemon(int id){
         if (id < 0 || id >= pokemons.size()) {
-            try {
-                throw new PokedexException("Invalid Pokemon ID: " + id);
-            } catch (PokedexException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            return pokemons.get(0);
         }
         return pokemons.get(id);
     }

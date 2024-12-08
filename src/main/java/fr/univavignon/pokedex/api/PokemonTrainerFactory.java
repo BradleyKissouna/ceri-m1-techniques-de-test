@@ -8,6 +8,13 @@ package fr.univavignon.pokedex.api;
 public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
     /**
+     * Default constructor.
+     */
+    public PokemonTrainerFactory() {
+        // No initialization needed
+    }
+
+    /**
      * Creates a PokemonTrainer instance.
      *
      * @param name Name of the created trainer.
