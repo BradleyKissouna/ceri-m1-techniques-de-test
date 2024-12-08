@@ -24,7 +24,6 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 	 * 
 	 * @param pokemon Pokemon to add to this pokedex.
 	 * @return Index of this pokemon relative to this pokedex.
-	 * @throws PokedexException If the given <code>index</code> is not valid.
 	 */
 	int addPokemon(Pokemon pokemon);
 	
@@ -33,7 +32,6 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 	 * 
 	 * @param id Unique pokedex relative identifier.
 	 * @return Pokemon denoted by the given identifier.
-	 * @throws PokedexException If the given <code>index</code> is not valid.
 	 */
 	Pokemon getPokemon(int id);
 	

@@ -69,9 +69,14 @@ public class Pokedex implements IPokedex {
      * @throws PokedexException If the given id is not valid.
      */
     @Override
-    public Pokemon getPokemon(int id) throws PokedexException {
+    public Pokemon getPokemon(int id){
         if (id < 0 || id >= pokemons.size()) {
-            throw new PokedexException("Invalid Pokemon ID: " + id);
+            try {
+                throw new PokedexException("Invalid Pokemon ID: " + id);
+            } catch (PokedexException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         return pokemons.get(id);
     }

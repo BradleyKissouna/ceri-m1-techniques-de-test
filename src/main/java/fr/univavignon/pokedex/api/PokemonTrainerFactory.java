@@ -17,12 +17,13 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
      */
     @Override
     public PokemonTrainer createTrainer(String name, Team team, IPokedexFactory pokedexFactory) {
-        // Crée un Pokedex pour le formateur
+        // Create a Pokedex for the trainer using the provided factories
         IPokedex pokedex = pokedexFactory.createPokedex(
             new PokemonMetadataProvider(),
             new PokemonFactory(new PokemonMetadataProvider())
         );
 
+        // Return a new PokemonTrainer instance with the specified name, team, and pokedex
         return new PokemonTrainer(name, team, pokedex);
     }
 

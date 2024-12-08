@@ -1,6 +1,13 @@
 package fr.univavignon.pokedex.api;
 
-
+/**
+ * Factory class for creating IPokedex instances.
+ *
+ * This class provides a static method for creating a new instance of Pokedex using
+ * the provided metadata provider and Pokemon factory.
+ *
+ * @author fv
+ */
 public class PokedexFactory implements IPokedexFactory {
 
     /**
