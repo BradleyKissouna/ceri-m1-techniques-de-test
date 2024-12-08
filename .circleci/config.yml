@@ -15,6 +15,9 @@ jobs:
       - run:
           name: Build With Maven
           command: mvn clean package -DskipTests
+      - run:
+          name: Generate Checkstyle Report
+          command: mvn checkstyle:checkstyle
 
   test:
     docker:
@@ -28,8 +31,11 @@ jobs:
           name: Generate JaCoCo Coverage Report
           command: mvn jacoco:report
       - run:
-          name: Check Code Style
-          command: mvn checkstyle:checkstyle
+          name: Generate and copy Checkstyle report and badge
+          command: |
+            python scripts/checkstyle_to_json.py
+            mkdir -p docs
+            cp target/site/checkstyle.html docs/checkstyle-report.html
       - codecov/upload
 
 workflows:
