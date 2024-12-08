@@ -62,21 +62,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <config>
-                        <module name="Checker">
-                            <module name="TreeWalker">
-                                <module name="JavadocStyle"/>
-                                <module name="Indentation">
-                                    <property name="basicOffset" value="4"/>
-                                    <property name="tabWidth" value="4"/>
-                                </module>
-                                <module name="LineLength">
-                                    <property name="max" value="120"/>
-                                </module>
-                            </module>
-                        </module>
-                    </config>
-                    <outputFile>target/site/checkstyle-result.xml</outputFile>
+                    <configLocation>src/main/resources/sun_checks.xml</configLocation>
+                    <outputFile>${project.build.directory}/site/checkstyle-result.xml</outputFile>
+                    <outputFileFormat>xml</outputFileFormat>
                 </configuration>
             </plugin>
         </plugins>
