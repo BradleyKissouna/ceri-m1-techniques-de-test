@@ -18,6 +18,8 @@ jobs:
       - run:
           name: Generate Checkstyle Report
           command: mvn checkstyle:checkstyle
+      - store_test_results:
+          path: target/site/
 
   test:
     docker:
