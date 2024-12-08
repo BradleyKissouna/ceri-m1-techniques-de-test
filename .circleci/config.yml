@@ -35,18 +35,12 @@ jobs:
           command: |
             mvn checkstyle:checkstyle
             python scripts/checkstyle_to_json.py
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       - run:
           name: Deploy to GitHub Pages
           uses: peaceiris/actions-gh-pages@v4
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./target/site  # Assurez-vous que ce chemin est correct
+            publish_dir: ./target/site
       - codecov/upload
 
 workflows:
