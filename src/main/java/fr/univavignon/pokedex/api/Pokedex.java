@@ -4,12 +4,34 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Pokedex class implementing the IPokedex interface.
+ * 
+ * This class provides an implementation for managing a collection of Pokemon,
+ * along with their metadata, using a given metadata provider and Pokemon factory.
+ * It allows adding, retrieving, and removing Pokemon, as well as accessing their
+ * metadata and creating new Pokemon instances.
+ * 
+ * @see IPokedex
+ * @see IPokemonMetadataProvider
+ * @see IPokemonFactory
+ * @see Pokemon
+ * @see PokemonMetadata
+ * 
+ * @author fv
+ */
 public class Pokedex implements IPokedex {
 
     private final IPokemonMetadataProvider metadataProvider;
     private final IPokemonFactory pokemonFactory;
     private final List<Pokemon> pokemons;
 
+    /**
+     * Constructs a new Pokedex with the specified metadata provider and Pokemon factory.
+     * 
+     * @param metadataProvider The metadata provider to use for retrieving Pokemon metadata.
+     * @param pokemonFactory The factory to use for creating Pokemon instances.
+     */
     public Pokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
         this.metadataProvider = metadataProvider;
         this.pokemonFactory = pokemonFactory;
@@ -17,9 +39,9 @@ public class Pokedex implements IPokedex {
     }
 
     /**
-     * Returns the number of pokemon this pokedex contains.
+     * Returns the number of Pokemon this Pokedex contains.
      * 
-     * @return Number of pokemon in this pokedex.
+     * @return Number of Pokemon in this Pokedex.
      */
     @Override
     public int size() {
@@ -27,64 +49,48 @@ public class Pokedex implements IPokedex {
     }
 
     /**
-     * Adds the given <tt>pokemon</tt> to this pokedex and returns
-     * it unique index.
+     * Adds the given Pokemon to this Pokedex and returns its unique index.
      * 
-     * @param pokemon Pokemon to add to this pokedex.
-     * @return Index of this pokemon relative to this pokedex.
-     * @throws PokedexException If the given <tt>index</tt> is not valid.
+     * @param pokemon Pokemon to add to this Pokedex.
+     * @return Index of this Pokemon relative to this Pokedex.
+     * @throws PokedexException If the given Pokemon is not valid.
      */
     @Override
     public int addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
-        return pokemons.size() - 1; // Retourne l'index du Pokémon ajouté
+        return pokemons.size() - 1; // Return the index of the added Pokemon
     }
-    /**
-     * Locates the pokemon identified by the given <tt>id</tt>.
-     * 
-     * @param id Unique pokedex relative identifier.
-     * @return Pokemon denoted by the given identifier.
-     * @throws PokedexException If the given <tt>index</tt> is not valid.
-     */
 
     /**
-     * Locates the pokemon identified by the given <tt>id</tt>.
+     * Locates the Pokemon identified by the given id.
      * 
-     * @param id Unique pokedex relative identifier.
+     * @param id Unique Pokedex relative identifier.
      * @return Pokemon denoted by the given identifier.
-     * @throws PokedexException If the given <tt>id</tt> is not valid.
+     * @throws PokedexException If the given id is not valid.
      */
     @Override
     public Pokemon getPokemon(int id) throws PokedexException {
-        // Check if the id is within valid range
         if (id < 0 || id >= pokemons.size()) {
-            // Throw an exception if the id is invalid
             throw new PokedexException("Invalid Pokemon ID: " + id);
         }
-        // Return the Pokemon at the specified id
         return pokemons.get(id);
     }
 
     /**
-     * Returns an unmodifiable list of all pokemons this pokedex contains.
-     * This method provides a snapshot of the current state of the pokedex.
+     * Returns an unmodifiable list of all Pokemon this Pokedex contains.
      * 
-     * @return Unmodifiable list of all pokemons.
+     * @return Unmodifiable list of all Pokemon.
      */
     @Override
     public List<Pokemon> getPokemons() {
-        // Create a new ArrayList from the current list of pokemons to avoid
-        // exposing the internal list to modifications.
         return new ArrayList<>(pokemons); // Return a modifiable copy of the list
     }
 
     /**
-     * Returns an unmodifiable list of all pokemons this pokedex contains.
-     * The list view will be sorted using the given <tt>order</tt>.
-     * This method provides a snapshot of the current state of the pokedex.
+     * Returns an unmodifiable list of all Pokemon this Pokedex contains, sorted by the given order.
      * 
      * @param order Comparator instance used for sorting the created view.
-     * @return Sorted unmodifiable list of all pokemons.
+     * @return Sorted unmodifiable list of all Pokemon.
      */
     @Override
     public List<Pokemon> getPokemons(Comparator<Pokemon> order) {
@@ -94,12 +100,11 @@ public class Pokedex implements IPokedex {
     }
 
     /**
-     * Retrieves and returns the metadata for the pokemon
-     * denoted by the given <tt>index</tt>.
+     * Retrieves and returns the metadata for the Pokemon denoted by the given index.
      * 
-     * @param index Index of the pokemon to retrieve metadata for.
-     * @return Metadata of the pokemon.
-     * @throws PokedexException If the given <tt>index</tt> is not valid.
+     * @param index Index of the Pokemon to retrieve metadata for.
+     * @return Metadata of the Pokemon.
+     * @throws PokedexException If the given index is not valid.
      */
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
@@ -107,11 +112,10 @@ public class Pokedex implements IPokedex {
     }
 
     /**
-     * Creates a new Pokemon instance and adds it to the pokedex.
+     * Creates a new Pokemon instance and adds it to the Pokedex.
      * 
-     * This method utilizes the PokemonFactory to create a Pokemon
-     * with the specified parameters and adds it to the internal list
-     * of pokemons maintained by this pokedex.
+     * This method utilizes the PokemonFactory to create a Pokemon with the specified
+     * parameters and adds it to the internal list of Pokemon maintained by this Pokedex.
      *
      * @param index Index of the Pokemon to create.
      * @param cp Combat Power of the Pokemon.
@@ -122,21 +126,16 @@ public class Pokedex implements IPokedex {
      */
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
-        // Use the factory to create a new Pokemon with the given attributes
         Pokemon pokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
-        
-        // Add the created Pokemon to the pokedex
         pokemons.add(pokemon);
-        
-        // Return the created Pokemon instance
         return pokemon;
     }
 
     /**
-     * Supprime le Pokémon à l'index indiqué.
+     * Removes the Pokemon at the specified index.
      * 
-     * @param index Index du Pokémon à supprimer.
-     * @throws PokedexException Si l'index est nul ou si le Pokémon n'existe pas.
+     * @param index Index of the Pokemon to remove.
+     * @throws PokedexException If the index is not valid or if the Pokemon does not exist.
      */
     public void removePokemon(int index) throws PokedexException {
         if (index < 0 || index >= pokemons.size()) {
@@ -144,5 +143,4 @@ public class Pokedex implements IPokedex {
         }
         pokemons.remove(index);
     }
-
 }
