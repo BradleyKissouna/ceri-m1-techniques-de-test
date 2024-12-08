@@ -37,20 +37,16 @@ jobs:
             python scripts/checkstyle_to_json.py
 
   deploy:
-    docker:
-      - image: cimg/openjdk:23.0
+    runs-on: ubuntu-latest
     steps:
-      - checkout
-      - run:
-          name: Generate Javadoc
-          command: mvn -B javadoc:javadoc
+      - name: Checkout code
+        uses: actions/checkout@v4
       - run:
           name: Deploy to GitHub Pages
           uses: peaceiris/actions-gh-pages@v4
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./target/site
-
+            publish_dir: ./target/site  # Assurez-vous que ce chemin est correct
       - codecov/upload
 
 workflows:
