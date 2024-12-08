@@ -48,7 +48,8 @@ jobs:
     docker:
       - image: cimg/openjdk:23.0
     steps:
-      - checkout
+      - name: Checkout
+          uses: actions/checkout@v4
       - run:
           name: Deploy to GitHub Pages
           uses: peaceiris/actions-gh-pages@v4
