@@ -34,9 +34,9 @@ jobs:
             python scripts/checkstyle_to_json.py
       - run:
           name: Publish GitHub Pages
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           command: |
+            git config --global user.email "kissouna.b@gmail.com"
+            git config --global user.name "BradleyKissouna"
             git add docs/
             git commit -m "Update Checkstyle badge"
             git push
