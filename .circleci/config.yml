@@ -17,10 +17,7 @@ jobs:
           command: mvn clean package -DskipTests
       - run:
           name: Generate Checkstyle Report
-          command: mvn -X checkstyle:checkstyle
-      - run:
-          name: List files in target/site/
-          command: ls -R target/site/
+          command: mvn checkstyle:checkstyle
 
   test:
     docker:
