@@ -55,10 +55,10 @@
                 <version>3.6.0</version>
                 <executions>
                     <execution>
+                        <phase>verify</phase>
                         <goals>
                             <goal>checkstyle</goal>
                         </goals>
-                        <phase>validate</phase>
                     </execution>
                 </executions>
                 <configuration>
