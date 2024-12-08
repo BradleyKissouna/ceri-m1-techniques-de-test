@@ -68,7 +68,7 @@
                             </module>
                         </module>
                     </config>
-                    <reportOutputFile>target/checkstyle-report.html</reportOutputFile>
+                    <outputFile>target/site/checkstyle.html</outputFile>
                 </configuration>
             </plugin>
         </plugins>
