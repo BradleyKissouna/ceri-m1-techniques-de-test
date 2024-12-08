@@ -33,26 +33,22 @@ jobs:
             mvn checkstyle:checkstyle
             python scripts/checkstyle_to_json.py
       - run:
-          name: Publish GitHub Pages
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          command: |
-            git config --global user.email "kissouna.b@gmail.com"
-            git config --global user.name "BradleyKissouna"
-            git config --global push.default current
-            git remote set-url origin https://$GITHUB_TOKEN@github.com/BradleyKissouna/ceri-m1-techniques-de-test.git
-            git add docs/
-            git commit -m "Update Checkstyle badge"
-            git push 
-      - codecov/upload
+          name: Generate Javadoc
+          command: mvn -B javadoc:javadoc
+      - run:
+          name: Deploy to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: target/site/
 
 workflows:
   build_and_test_and_deploy:
     jobs:
       - build:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - build

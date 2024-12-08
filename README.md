@@ -43,5 +43,4 @@ Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin d
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/BradleyKissouna/ceri-m1-techniques-de-test/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/BradleyKissouna/ceri-m1-techniques-de-test/tree/develop) 
 [![codecov](https://codecov.io/gh/BradleyKissouna/ceri-m1-techniques-de-test/branch/develop/graph/badge.svg?token=QMX0WKC3RF)](https://codecov.io/gh/BradleyKissouna/ceri-m1-techniques-de-test)
-[![Checkstyle](https://img.shields.io/endpoint?url=https:/BradleyKissouna/ceri-m1-techniques-de-test/docs/checkstyle-badge.json)]
-
+![Checkstyle](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/BradleyKissouna/ceri-m1-techniques-de-test/develop/docs/checkstyle-badge.json)
