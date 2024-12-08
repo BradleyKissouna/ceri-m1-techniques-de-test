@@ -28,7 +28,7 @@ jobs:
           name: Generate JaCoCo Coverage Report
           command: mvn jacoco:report
       - run:
-          name: Generate and copy Checkstyle report and badge
+          name: Generate and copy Checkstyle report with badge
           command: |
             mvn checkstyle:checkstyle
             ls -R target/site/

@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import json
 
 # Lire le rapport Checkstyle (XML)
-tree = ET.parse('../target/site/checkstyle-result.xml')
+tree = ET.parse('target/site/checkstyle-result.xml')
 root = tree.getroot()
 
 # Variables pour suivre les erreurs
@@ -28,7 +28,7 @@ badge_data = {
 }
 
 # Sauvegarder le fichier JSON dans le dossier docs
-with open('../docs/checkstyle-badge.json', 'w') as json_file:
+with open('docs/checkstyle-badge.json', 'w') as json_file:
     json.dump(badge_data, json_file)
 
 print("Badge JSON généré dans docs/checkstyle-badge.json")
