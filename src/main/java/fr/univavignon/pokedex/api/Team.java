@@ -7,12 +7,12 @@ package fr.univavignon.pokedex.api;
 public enum Team {
 
 	// Team Mystic, led by Blanche
-	MYSTIC,
+	MYSTIC, // The mystic team, known for their calm and collected approach.
 
 	// Team Instinct, led by Spark
-	INSTINCT,
-	
+	INSTINCT, // The instinct team, known for their trust in their instincts.
+
 	// Team Valor, led by Candela
-	VALOR
+	VALOR // The valor team, known for their bravery and strength.
 
 }
