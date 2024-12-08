@@ -63,8 +63,7 @@
                 </executions>
                 <configuration>
                     <configLocation>src/main/resources/sun_checks.xml</configLocation>
-                    <outputFile>${project.build.directory}/site/checkstyle-result.xml</outputFile>
-                    <outputFileFormat>xml</outputFileFormat>
+                    <outputFile>checkstyle-result.xml</outputFile>
                 </configuration>
             </plugin>
         </plugins>
