@@ -40,14 +40,14 @@ jobs:
           command: |
             git config --global user.email "kissouna.b@gmail.com"
             git config --global user.name "BradleyKissouna"
-            git remote set-url origin https://$GITHUB_TOKEN@github.com/BradleyKissouna/ceri-m1-techniques-de-test.git
+            git remote set-url gh-pages https://$GITHUB_TOKEN@github.com/BradleyKissouna/ceri-m1-techniques-de-test.git
             git add docs/
             git commit -m "Update Checkstyle badge"
             git push
       - codecov/upload
 
 workflows:
-  build_and_test_and_deploy:
+  build_and_test:
     jobs:
       - build:
           filters:
