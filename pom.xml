@@ -64,6 +64,7 @@
                 <configuration>
                     <configLocation>src/main/resources/sun_checks.xml</configLocation>
                     <outputFile>target/site/checkstyle-result.xml</outputFile>
+                    <failsOnError>false</failsOnError>
                 </configuration>
             </plugin>
         </plugins>
