@@ -42,7 +42,7 @@ jobs:
             git config --global user.name "BradleyKissouna"
             git config --global push.autoSetupRemote true
             git add docs/
-            git commit -m "Update Checkstyle badge"
+            git commit -am "Update Checkstyle badge"
             git push
       - codecov/upload
 
