@@ -24,11 +24,18 @@
         <module name="CyclomaticComplexity">
             <property name="max" value="10"/>
         </module>
+
+        <!-- Vérifie la présence des Javadocs pour les méthodes. -->
+        <module name="JavadocMethod">
+            <property name="required" value="true"/>
+        </module>
+
+        <!-- Vérifie la présence des Javadocs pour les types. -->
+        <module name="JavadocType">
+            <property name="required" value="true"/>
+        </module>
     </module>
 
     <!-- Vérifie qu'il y a une ligne vide à la fin du fichier. -->
     <module name="NewlineAtEndOfFile"/>
-
-    <module name="JavadocMethod"/>
-    <module name="JavadocType"/>
 </module>
