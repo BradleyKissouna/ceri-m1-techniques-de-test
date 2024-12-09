@@ -49,9 +49,7 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build:
-          filters:
-            branches: [master, develop]
+      - build
       - test:
           requires:
             - build
