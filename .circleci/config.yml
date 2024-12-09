@@ -47,7 +47,7 @@ jobs:
       - codecov/upload
 
 workflows:
-  build_and_test:
+  build_and_test_and_deploy:
     jobs:
       - build:
           filters:
