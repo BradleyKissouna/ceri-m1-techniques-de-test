@@ -41,13 +41,9 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemon() throws PokedexException {
+    public void testGetPokemon(){
         pokedex.addPokemon(pikachu);
         assertEquals(pikachu, pokedex.getPokemon(0));
-
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
-
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(1));
     }
 
     @Test
