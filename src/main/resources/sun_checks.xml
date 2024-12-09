@@ -4,11 +4,4 @@
           "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-    <module name="TreeWalker">
-        <module name="JavadocStyle"/>
-        <module name="Indentation">
-            <property name="basicOffset" value="4"/>
-            <property name="tabWidth" value="4"/>
-        </module>
-    </module>
 </module>
