@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 import json
 
-# Lire le rapport Checkstyle (XML)
+# Rapport Checkstyle parsed (XML)
 tree = ET.parse('target/site/checkstyle-result.xml')
 root = tree.getroot()
 
