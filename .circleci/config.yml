@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Generate and copy Checkstyle report with badge
           command: |
-            mvn checkstyle:checkstyle
+            mvn checkstyle:checkstyle -X
             python scripts/checkstyle_to_json.py
       - run:
           name: Publish checkstyle badge to GitHub
