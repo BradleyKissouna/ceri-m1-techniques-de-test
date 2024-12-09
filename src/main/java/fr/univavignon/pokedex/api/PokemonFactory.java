@@ -26,7 +26,8 @@ public class PokemonFactory implements IPokemonFactory {
      * 
      * @return A random IV between 0 and 15.
      */
-    private static int calculateIV() {
+    @Override
+    public int calculateIV() {
         Random random = new Random();
         return random.nextInt(16); // IV between 0 and 15
     }

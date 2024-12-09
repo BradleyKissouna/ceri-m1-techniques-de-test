@@ -15,7 +15,6 @@ public interface IPokemonTrainerFactory {
 	 * @param pokedexFactory Factory to use for creating associated pokedex instance.
 	 * @return Created trainer instance.
 	 */
-	@Override
 	PokemonTrainer createTrainer(String name, Team team, IPokedexFactory pokedexFactory);
 
 }
