@@ -25,14 +25,14 @@
             <property name="max" value="10"/>
         </module>
 
-        <!-- Vérifie la présence des Javadocs pour les méthodes. -->
+         <!-- Vérifie la présence des Javadocs pour les méthodes -->
         <module name="JavadocMethod">
-            <property name="required" value="true"/>
+            <property name="scope" value="public"/>
         </module>
 
-        <!-- Vérifie la présence des Javadocs pour les types. -->
+        <!-- Vérifie la présence des Javadocs pour les types -->
         <module name="JavadocType">
-            <property name="required" value="true"/>
+            <property name="scope" value="public"/>
         </module>
     </module>
 
