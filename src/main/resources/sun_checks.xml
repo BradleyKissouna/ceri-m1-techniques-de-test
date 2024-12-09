@@ -26,14 +26,10 @@
         </module>
 
          <!-- Vérifie la présence des Javadocs pour les méthodes -->
-        <module name="JavadocMethod">
-            <property name="scope" value="public"/>
-        </module>
+        <module name="JavadocMethod"/>
 
         <!-- Vérifie la présence des Javadocs pour les types -->
-        <module name="JavadocType">
-            <property name="scope" value="public"/>
-        </module>
+        <module name="JavadocType"/>
     </module>
 
     <!-- Vérifie qu'il y a une ligne vide à la fin du fichier. -->
