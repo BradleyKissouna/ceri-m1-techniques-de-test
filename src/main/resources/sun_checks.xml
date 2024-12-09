@@ -29,9 +29,6 @@
     <!-- Vérifie qu'il y a une ligne vide à la fin du fichier. -->
     <module name="NewlineAtEndOfFile"/>
 
-    <module name="JavadocMethod">
-        <property name="checkConstructors" value="true"/>
-    </module>
-
+    <module name="JavadocMethod"/>
     <module name="JavadocType"/>
 </module>
