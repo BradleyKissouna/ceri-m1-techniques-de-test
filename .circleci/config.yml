@@ -40,7 +40,7 @@ jobs:
           command: |
             git config --global user.email "kissouna.b@gmail.com"
             git config --global user.name "BradleyKissouna"
-            git config --global push.autoSetupRemote always
+            git config --global push.autoSetupRemote true
             git add docs/
             git commit -m "Update Checkstyle badge"
             git push
