@@ -34,6 +34,18 @@ public class IPokedexTest {
     }
 
     @Test
+    public void testCalculateIV() {
+        int iterations = 10000;
+        boolean[] ivPresence = new boolean[16];
+
+        for (int i = 0; i < iterations; i++) {
+            int iv = pokedex.calculateIV();
+            assertTrue(iv >= 0 && iv <= 15);
+            ivPresence[iv] = true;
+        }
+    }
+
+    @Test
     public void testGetPokedexInfo() throws PokedexException {
         assertEquals(0, pokedex.size());
         pokedex.addPokemon(pikachu);
