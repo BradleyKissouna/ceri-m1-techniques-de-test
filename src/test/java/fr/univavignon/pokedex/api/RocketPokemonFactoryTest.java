@@ -70,4 +70,15 @@ public class RocketPokemonFactoryTest {
         assertFalse(executionTime < 1_000_000);
     }
 
+    @Test
+    public void testCalculateIV() {
+        RocketPokemonFactory factory = new RocketPokemonFactory();
+        
+        // On répète le test plusieurs fois pour s'assurer que l'IV est toujours entre 0 et 15
+        for (int i = 0; i < 1000; i++) {
+            int iv = factory.calculateIV();
+            assertTrue(iv >= 0 && iv <= 15);
+        }
+    }
+
 }
