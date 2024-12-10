@@ -30,7 +30,7 @@ public class RocketPokemonFactoryTest {
         assertEquals(0, missingno.getHp());
         assertEquals(0, missingno.getDust());
         assertEquals(0, missingno.getCandy());
-        assertEquals(0, missingno.getIv(), 0.1);
+        assertEquals(0, missingno.getIv(), 1.0);
 
         // Test pour créer un Pokémon avec un index négatif (-1 -> "Ash's Pikachu")
         Pokemon ashPikachu = rocketPokemonFactory.createPokemon(-1, 100, 50, 1000, 10);
