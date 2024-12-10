@@ -15,9 +15,6 @@ jobs:
       - run:
           name: Build With Maven
           command: mvn clean package -DskipTests
-      - run:
-          name: Generate Javadoc
-          command: mvn -B javadoc:javadoc
 
   test:
     docker:
@@ -33,7 +30,7 @@ jobs:
       - run:
           name: Generate and copy Checkstyle report with badge
           command: |
-            mvn checkstyle:checkstyle -X
+            mvn checkstyle:checkstyle
             python scripts/checkstyle_to_json.py
       - run:
           name: Publish checkstyle badge to GitHub
