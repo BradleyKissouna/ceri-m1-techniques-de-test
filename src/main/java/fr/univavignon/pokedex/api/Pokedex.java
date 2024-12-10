@@ -68,7 +68,7 @@ public class Pokedex implements IPokedex {
      * @return Pokemon denoted by the given identifier.
      */
     @Override
-    public Pokemon getPokemon(int id){
+    public Pokemon getPokemon(int id) throws PokedexException {
         if (id < 0 || id >= pokemons.size()) {
             return pokemons.get(0);
         }
