@@ -3,6 +3,7 @@ package fr.univavignon.pokedex.api;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Implementation of the IPokedex interface.
@@ -126,6 +127,17 @@ public class Pokedex implements IPokedex {
         Pokemon pokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
         pokemons.add(pokemon);
         return pokemon;
+    }
+
+    /**
+     * Calculates an Individual Value (IV) for a Pokemon statistic, ranging from 0 to 15.
+     * 
+     * @return A random IV between 0 and 15.
+     */
+    @Override
+    public int calculateIV() {
+        Random random = new Random();
+        return random.nextInt(16); // IV between 0 and 15
     }
 
 }
