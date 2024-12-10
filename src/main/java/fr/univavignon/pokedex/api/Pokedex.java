@@ -61,7 +61,7 @@ public class Pokedex implements IPokedex {
      * 
      * @param id Unique pokedex relative identifier.
      * @return Pokemon denoted by the given identifier.
-     * @throws PokedexException If the given <tt>index</tt> is not valid.
+     * @throws PokedexException If the given <code>index</code> is not valid.
      */
     @Override
     public Pokemon getPokemon(int id) throws PokedexException {
