@@ -18,5 +18,12 @@ public interface IPokemonFactory {
 	 * @return Created pokemon instance.
 	 */
 	Pokemon createPokemon(int index, int cp, int hp, int dust, int candy);
-	
+
+	/**
+	 * Calculates an Individual Value (IV) for a pokemon.
+	 * 
+	 * @return Calculated IV.
+	 */
+	int calculateIV();
+
 }

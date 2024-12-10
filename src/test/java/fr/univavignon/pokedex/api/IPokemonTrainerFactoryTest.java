@@ -2,60 +2,55 @@ package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class IPokemonTrainerFactoryTest {
-    private IPokemonTrainerFactory trainerFactory;
-    private IPokedexFactory pokedexFactory;
+    private PokemonTrainerFactory trainerFactory;
+    private PokedexFactory pokedexFactory;
 
+    /**
+     * Initializes the PokemonTrainerFactory to be tested and a mock PokedexFactory
+     * that will be used to create IPokedex instances.
+     */
     @Before
     public void setUp() {
-        trainerFactory = mock(IPokemonTrainerFactory.class);
-        pokedexFactory = mock(IPokedexFactory.class);
+        trainerFactory = new PokemonTrainerFactory();
+        pokedexFactory = mock(PokedexFactory.class);
     }
 
+    /**
+     * Verifies that a PokemonTrainer instance can be created with the trainer's
+     * name, team and a pokedex factory.
+     */
     @Test
     public void testCreatePokemonTrainer() {
-        IPokedex pokedex = mock(IPokedex.class); // Création d'un pokedex mocké
+        IPokedex pokedex = mock(IPokedex.class);
+        when(pokedexFactory.createPokedex(any(), any())).thenReturn(pokedex);
+
+        PokemonTrainer trainer = trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory);
+
+        assertNotNull("Trainer should not be null", trainer);
+        assertEquals("Trainer name should be Zen", "Zen", trainer.getName());
+        assertEquals("Trainer team should be INSTINCT", Team.INSTINCT, trainer.getTeam());
+        assertEquals("Trainer's pokedex should match", pokedex, trainer.getPokedex());
+    }
+
+    /**
+     * Verifies that a PokemonTrainer instance's attributes can be retrieved.
+     */
+    @Test
+    public void testGetPokemonTrainerInfo() {
+        IPokedex pokedex = mock(IPokedex.class);
+        when(pokedexFactory.createPokedex(any(), any())).thenReturn(pokedex);
+
         PokemonTrainer expectedTrainer = new PokemonTrainer("Zen", Team.INSTINCT, pokedex);
-        when(trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory)).thenReturn(expectedTrainer);
-        
-        PokemonTrainer actualTrainer = trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory);
-        assertEquals(expectedTrainer, actualTrainer);
+
+        assertEquals("Trainer name should be Zen", "Zen", expectedTrainer.getName());
+        assertEquals("Trainer team should be INSTINCT", Team.INSTINCT, expectedTrainer.getTeam());
+        assertEquals("Trainer's pokedex should match", pokedex, expectedTrainer.getPokedex());
     }
 
-    @Test
-    public void testCreateMultiplePokemonTrainers() {
-        IPokedex pokedex1 = mock(IPokedex.class);
-        IPokedex pokedex2 = mock(IPokedex.class);
-        IPokedex pokedex3 = mock(IPokedex.class);
-
-        PokemonTrainer trainer1 = new PokemonTrainer("Zen", Team.INSTINCT, pokedex1);
-        PokemonTrainer trainer2 = new PokemonTrainer("Misty", Team.INSTINCT, pokedex2);
-        PokemonTrainer trainer3 = new PokemonTrainer("Brock", Team.INSTINCT, pokedex3);
-
-        when(trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory)).thenReturn(trainer1);
-        when(trainerFactory.createTrainer("Misty", Team.INSTINCT, pokedexFactory)).thenReturn(trainer2);
-        when(trainerFactory.createTrainer("Brock", Team.INSTINCT, pokedexFactory)).thenReturn(trainer3);
-
-        assertEquals(trainer1, trainerFactory.createTrainer("Zen", Team.INSTINCT, pokedexFactory));
-        assertEquals(trainer2, trainerFactory.createTrainer("Misty", Team.INSTINCT, pokedexFactory));
-        assertEquals(trainer3, trainerFactory.createTrainer("Brock", Team.INSTINCT, pokedexFactory));
-    }
-
-    @Test
-    public void testCreateTrainerReturnsNotNull() {
-        // Test pour s'assurer que la création d'un entraîneur ne renvoie pas null
-        IPokedex pokedex = mock(IPokedex.class); // Création d'un pokedex mocké
-        PokemonTrainer actualTrainer = new PokemonTrainer("Gary", Team.INSTINCT, pokedex);
-        when(trainerFactory.createTrainer("Gary", Team.INSTINCT, pokedexFactory)).thenReturn(actualTrainer);
-
-        PokemonTrainer returnedTrainer = trainerFactory.createTrainer("Gary", Team.INSTINCT, pokedexFactory);
-        assertNotNull(returnedTrainer);
-    }
 }

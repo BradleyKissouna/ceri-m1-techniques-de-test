@@ -32,10 +32,16 @@ public enum PokemonComparators implements Comparator<Pokemon> {
 		this.delegate = delegate;
 	}
 
-	/** {@inheritDoc} **/
+	/** {@inheritDoc}
+	 * 
+	 * Delegates comparison to the delegate comparator.
+	 * 
+	 * @param first  First pokemon to compare.
+	 * @param second Second pokemon to compare.
+	 * @return Comparison result.
+	 */
 	@Override
 	public int compare(final Pokemon first, final Pokemon second) {
-		
 		return delegate.compare(first, second);
 	}
 

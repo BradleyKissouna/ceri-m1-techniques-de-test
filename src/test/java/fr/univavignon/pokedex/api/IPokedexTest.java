@@ -2,67 +2,98 @@ package fr.univavignon.pokedex.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class IPokedexTest {
-    private IPokedex pokedex;
-    private Pokemon pokemon1;
-    private Pokemon pokemon2;
-    private Pokemon pokemon3;
-    private Pokemon pokemon4;
+    private Pokedex pokedex;
+    private PokemonMetadataProvider metadataProvider;
+    private Pokemon pikachu;
+    private Pokemon bulbisar;
+    private Pokemon ivysaur;
 
     @Before
     public void setUp() {
-        pokedex = mock(IPokedex.class);
-
-        pokemon1 = new Pokemon(1, "Pikachu", 55, 40, 35, 500, 60, 300, 25, 0.9);
-        pokemon2 = new Pokemon(2, "Bulbizarre", 60, 50, 45, 400, 50, 200, 20, 0.8);
-        pokemon3 = new Pokemon(3, "Salamèche", 52, 43, 39, 600, 55, 250, 15, 0.85);
-        pokemon4 = new Pokemon(4, "Carapuce", 50, 60, 50, 550, 60, 300, 30, 0.9);
+        metadataProvider = new PokemonMetadataProvider();
+        pokedex = new Pokedex(metadataProvider, new PokemonFactory(metadataProvider));
+        pikachu = new Pokemon(150, "Pikachu", 55, 40, 35, 500, 60, 300, 25, 0.9);
+        bulbisar = new Pokemon(1, "Bulbasaur", 45, 49, 49, 345, 65, 65, 45, 0.9);
+        ivysaur = new Pokemon(2, "Ivysaur", 60, 62, 63, 405, 80, 80, 60, 0.9);
     }
 
     @Test
-    public void testAddPokemon1() {
-        when(pokedex.addPokemon(pokemon1)).thenReturn(1);
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon1));
-        assertTrue(pokedex.getPokemons().contains(pokemon1));
+    public void testAddPikachu() {
+        assertEquals(pokedex.addPokemon(pikachu), 0);
+        assertSame(pikachu, pokedex.getPokemons().get(0));
+        assertTrue(pokedex.getPokemons().contains(pikachu));
     }
 
     @Test
-    public void testAddPokemon2() {
-        when(pokedex.addPokemon(pokemon2)).thenReturn(2);
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon2));
-        assertTrue(pokedex.getPokemons().contains(pokemon2));
+    public void testCalculateIV() {
+        int iterations = 10000;
+        boolean[] ivPresence = new boolean[16];
+
+        for (int i = 0; i < iterations; i++) {
+            int iv = pokedex.calculateIV();
+            assertTrue(iv >= 0 && iv <= 15);
+            ivPresence[iv] = true;
+        }
     }
 
     @Test
-    public void testAddPokemon3() {
-        when(pokedex.addPokemon(pokemon3)).thenReturn(3);
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon3));
-        assertTrue(pokedex.getPokemons().contains(pokemon3));
+    public void testGetPokedexInfo() throws PokedexException {
+        assertEquals(0, pokedex.size());
+        pokedex.addPokemon(pikachu);
+        assertEquals(1, pokedex.size());
     }
 
     @Test
-    public void testAddPokemon4() {
-        when(pokedex.addPokemon(pokemon4)).thenReturn(4);
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon4));
-        assertTrue(pokedex.getPokemons().contains(pokemon4));
+    public void testGetPokemon() throws PokedexException{
+        pokedex.addPokemon(pikachu);
+        assertEquals(pikachu, pokedex.getPokemon(0));
+
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
+
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(1));
     }
 
     @Test
-    public void testGetAllPokemons() {
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pokemon1, pokemon2, pokemon3, pokemon4));
-        assertTrue(pokedex.getPokemons().contains(pokemon1));
-        assertTrue(pokedex.getPokemons().contains(pokemon2));
-        assertTrue(pokedex.getPokemons().contains(pokemon3));
-        assertTrue(pokedex.getPokemons().contains(pokemon4));
+    public void testGetPokemons() {
+        pokedex.addPokemon(pikachu);
+        assertEquals(pikachu, pokedex.getPokemons().get(0));
     }
+
+    @Test
+    public void testGetPokemonsWithComparator() {
+        pokedex.addPokemon(pikachu);
+        pokedex.addPokemon(ivysaur);
+        pokedex.addPokemon(bulbisar);
+
+        List<Pokemon> listParIndex = pokedex.getPokemons(PokemonComparators.NAME);
+
+        assertEquals(bulbisar, listParIndex.get(0));
+        assertEquals(ivysaur, listParIndex.get(1));
+        assertEquals(pikachu, listParIndex.get(2));
+    }
+
+    @Test
+    public void testGetPokemonMetadata() throws PokedexException {
+        assertTrue(pokedex.getPokemonMetadata(1).getName().equals("Bulbasaur"));
+
+        // Test with an invalid index (less than 0)
+        int invalidIndexLessThan0 = -1;
+        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndexLessThan0));
+    }
+
+    @Test
+    public void testCreatePokemon() throws PokedexException {
+        pokedex.createPokemon(0, 0, 0, 0, 0);
+        assertEquals(1, pokedex.size());
+    }
+
 }
