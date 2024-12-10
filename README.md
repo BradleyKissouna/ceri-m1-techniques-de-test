@@ -1,7 +1,7 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
 **Nom et prénom** : Kissouna Bradley  
-**Groupe** : ILSEN
+**Groupe** : ILSEN Alternance
 
 ## Introduction
 
