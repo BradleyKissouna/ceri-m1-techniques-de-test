@@ -11,6 +11,8 @@
 - **Problème d'importation** : L'import `org.apache.commons.collections4.map.UnmodifiableMap` est inutile, car la carte n'est pas modifiée après sa création.
 - **Problème EndOfFile** : Il n'y a pas de EndOfFile
 
+- **Problème Variable** : index2name n'est pas final
+
 ### 2. **Optimisation de la bibliothèque Apache Commons Collections**  
 L'utilisation de `UnmodifiableMap` est superflue. Il serait préférable d'utiliser une carte standard Java, puisque celle-ci ne nécessite pas d'être immuable après sa création.
 
