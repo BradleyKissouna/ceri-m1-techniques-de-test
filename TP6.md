@@ -9,6 +9,7 @@
 - **Mauvais package** : Le fichier `RocketPokemonFactory` est placé dans le package `fr.univavignon.pokedex.imp` au lieu de `fr.univavignon.pokedex.api`, ce qui empêche la compilation.
 - **Méthode `calculateIV()` non implémentée** : La méthode `calculateIV()` n'est pas marquée avec l'annotation `@Override`, ce qui provoque une erreur de compilation.
 - **Problème d'importation** : L'import `org.apache.commons.collections4.map.UnmodifiableMap` est inutile, car la carte n'est pas modifiée après sa création.
+- **Problème EndOfFile** : Il n'y a pas de EndOfFile
 
 ### 2. **Optimisation de la bibliothèque Apache Commons Collections**  
 L'utilisation de `UnmodifiableMap` est superflue. Il serait préférable d'utiliser une carte standard Java, puisque celle-ci ne nécessite pas d'être immuable après sa création.
