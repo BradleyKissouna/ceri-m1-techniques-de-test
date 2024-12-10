@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.apache.commons.collections4.map.UnmodifiableMap;
+// import org.apache.commons.collections4.map.UnmodifiableMap; HS
 
 import fr.univavignon.pokedex.api.IPokemonFactory;
 import fr.univavignon.pokedex.api.Pokemon;
@@ -18,10 +18,11 @@ public class RocketPokemonFactory implements IPokemonFactory {
         aMap.put(0, "MISSINGNO");
         aMap.put(1, "Bulbasaur");
         //TODO : Gotta map them all !
-        index2name = UnmodifiableMap.unmodifiableMap(aMap);
+        // index2name = UnmodifiableMap.unmodifiableMap(aMap); HS
+		index2name = aMap;
 	}
 	
-	private static int generateRandomStat() {
+	static int generateRandomStat() {
 		int total = 0;
 		for(int i=0; i < 1000000; i++)
 		{
