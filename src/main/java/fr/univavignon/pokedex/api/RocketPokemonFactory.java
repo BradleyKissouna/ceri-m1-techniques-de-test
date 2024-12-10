@@ -58,4 +58,10 @@ public class RocketPokemonFactory implements IPokemonFactory {
 		return new Pokemon(index, name, attack, defense, stamina, cp, hp, dust, candy, iv);
 	}
 
+	@Override
+    public int calculateIV() {
+        Random random = new Random();
+        return random.nextInt(16); // IV between 0 and 15
+    }
+
 }
